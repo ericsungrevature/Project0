@@ -2,6 +2,7 @@ package com.sung.customer;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 public interface CustomerDao {
 
@@ -23,6 +24,6 @@ public interface CustomerDao {
 
 	void push(Customer sender, Customer receiver, double amount) throws SQLException;
 
-	void pull(Customer receiver) throws SQLException;
+	void pull(Customer receiver, Scanner scan) throws SQLException;
 
 }

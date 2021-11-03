@@ -165,7 +165,7 @@ public class UserDaoImpl implements UserDao {
 			case "4":
 				//Call the pull method and logging the transaction
 				try {
-					cdao.pull(customer);
+					cdao.pull(customer, scan);
 					logTransaction("Customer "
 							+ customer.getId() + " " + customer.getUsername()
 							+ " received funds\n");

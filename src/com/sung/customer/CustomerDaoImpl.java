@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.sung.bank.ConnectionFactory;
 
@@ -204,14 +205,27 @@ public class CustomerDaoImpl implements CustomerDao {
 	 * It will remove the entries acquired from the transfer table
 	 */
 	@Override
-	public void pull(Customer receiver) throws SQLException {
+	public void pull(Customer receiver, Scanner scan) throws SQLException {
 		String sql = "select * from transfer where receiver_id = " + receiver.getId();
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
 		while (resultSet.next()) {
 			double amount = resultSet.getDouble(4);
 			System.out.printf("Receiving $%.2f\n", amount);
-			deposit(receiver, amount);
+			String input = null;
+			while(true) {
+				System.out.print("Would you like to accept this transfer? Y / N ");
+				input = scan.nextLine();
+				if (input.equalsIgnoreCase("Y")) {
+					deposit(receiver, amount);
+					break;
+				} else if (input.equalsIgnoreCase("N")) {
+					break;
+				} else {
+					System.out.println("Invalid Input: " + input);
+				}
+			}
+			
 		}
 		sql = "delete from transfer where receiver_id = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
