@@ -120,7 +120,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void viewAccount() {
 		Scanner sc = new Scanner(System.in);
-//		String input = null;
 		System.out.print("Enter the username: ");
 		try {
 			String input = sc.nextLine();
