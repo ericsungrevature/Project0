@@ -1,6 +1,7 @@
 package com.sung.employee;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public interface EmployeeDao {
 
@@ -8,9 +9,9 @@ public interface EmployeeDao {
 
 	Employee getEmployeeByUsername(String username) throws SQLException;
 
-	void checkAccount();
+	void checkAccount(Scanner scan);
 
-	void viewAccount();
+	void viewAccount(Scanner scan);
 
 	void viewLog();
 

@@ -221,10 +221,10 @@ public class UserDaoImpl implements UserDao {
 				System.out.println("Invalid Input: " + input);
 				break;
 			case "1":
-				edao.checkAccount();
+				edao.checkAccount(scan);
 				break;
 			case "2":
-				edao.viewAccount();
+				edao.viewAccount(scan);
 				break;
 			case "3":
 				edao.viewLog();

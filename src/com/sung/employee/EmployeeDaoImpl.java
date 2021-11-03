@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.sung.bank.ConnectionFactory;
@@ -79,14 +78,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	 * If the account is rejected the entry in the customer table will be removed
 	 */
 	@Override
-	public void checkAccount() {
-		Scanner scan = new Scanner(System.in);
+	public void checkAccount(Scanner scan) {
 		String input = null;
 		try {
 			List<Customer> list = cdao.getCustomers("pending");
 			if (list.isEmpty()) {
 				System.out.println("No pending accounts available at this time");
-				scan.close();
 				return;
 			}
 			for (int i = 0; i < list.size(); i++) {
@@ -108,7 +105,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 		} catch (SQLException e) {
 			System.out.println("Invalid Input: " + input);
-			scan.close();
 		}
 	}
 
@@ -118,19 +114,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	 * It will display the Customer information
 	 */
 	@Override
-	public void viewAccount() {
-		Scanner sc = new Scanner(System.in);
+	public void viewAccount(Scanner scan) {
 		System.out.print("Enter the username: ");
 		try {
-			String input = sc.nextLine();
+			String input = scan.nextLine();
 			Customer customer = cdao.getCustomerByUsername(input);
 			System.out.printf("Username: %s, Balance: $%.2f, Status: %s\n", customer.getUsername(), customer.getBalance(), customer.getStatus());
 		} catch (SQLException e) {
 			System.out.println("Invalid Input: customer not registered");
-			sc.close();
 			return;
-		} catch (NoSuchElementException e) {}
-		sc.close();
+		}
 	}
 
 	/*
