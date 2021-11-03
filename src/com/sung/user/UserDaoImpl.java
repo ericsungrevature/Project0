@@ -47,11 +47,9 @@ public class UserDaoImpl implements UserDao {
 				loginCustomer();
 				break;
 			case "2":
-				System.out.println("Employee Login");
 				loginEmployee();
 				break;
 			case "3":
-				System.out.println("Register Customer");
 				registerCustomer();
 				break;
 			case "4":

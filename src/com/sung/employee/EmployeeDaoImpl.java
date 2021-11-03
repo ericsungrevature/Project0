@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.sung.bank.ConnectionFactory;
@@ -118,19 +119,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	 */
 	@Override
 	public void viewAccount() {
-		Scanner scan = new Scanner(System.in);
-		String input = null;
+		Scanner sc = new Scanner(System.in);
+//		String input = null;
 		System.out.print("Enter the username: ");
-		input = scan.nextLine();
 		try {
+			String input = sc.nextLine();
 			Customer customer = cdao.getCustomerByUsername(input);
 			System.out.printf("Username: %s, Balance: $%.2f, Status: %s\n", customer.getUsername(), customer.getBalance(), customer.getStatus());
 		} catch (SQLException e) {
 			System.out.println("Invalid Input: customer not registered");
-			scan.close();
+			sc.close();
 			return;
-		}
-		scan.close();
+		} catch (NoSuchElementException e) {}
+		sc.close();
 	}
 
 	/*
