@@ -10,18 +10,16 @@ import java.util.Scanner;
 import com.sung.bank.ConnectionFactory;
 import com.sung.customer.Customer;
 import com.sung.customer.CustomerDao;
-import com.sung.customer.CustomerDaoFactory;
 import com.sung.employee.Employee;
 import com.sung.employee.EmployeeDao;
-import com.sung.employee.EmployeeDaoFactory;
 
 public class UserDaoImpl implements UserDao {
 
 	private Connection connection;
 	private Scanner scan = new Scanner(System.in);
 	private String input;
-	private CustomerDao cdao = CustomerDaoFactory.getCustomerDao();
-	private EmployeeDao edao = EmployeeDaoFactory.getEmployeeDao();
+	private CustomerDao cdao = UserDaoFactory.getCustomerDao();
+	private EmployeeDao edao = UserDaoFactory.getEmployeeDao();
 
 	public UserDaoImpl() {
 		this.connection = ConnectionFactory.getConnection();
